@@ -4,6 +4,9 @@
 - **hooks カデンス設計**: Per-session/Per-turn/Per-tool の3分類が明確化。テストスイートは `PostToolUse` ではなく `Stop` フックへ。PreToolUse ブロック理由は `>&2` で Claude に伝達。PostToolUse には `; exit 0` フォールバック必須。
 - **コンテキスト定量モデルと設計原則**: 90% 使用率で深刻劣化。ガイダンスなしの成功率 33%（Anthropic 実測）。2026 年は「プロンプト技巧 < コンテキスト設計（CLAUDE.md・MCP・サブエージェント構造）」が定説化。フィードバックループ（検証コマンド）をプロンプトに埋め込む手法が推奨。
 - **Skills 統合・CLAUDE.md 10-section・MCP 最小権限**: `.claude/commands/` と `.claude/skills/` が 2026 年に統合。CLAUDE.md は `/init` で自動生成後、10-section 構造に補強が最短経路。`managed-mcp.json` で組織固定配布。`/status` コマンドで設定競合をデバッグ。
+- **[追加] Auto-memory**: v2.1.59+ で Claude が自律的に `~/.claude/projects/<project>/memory/` へ知識蓄積。MEMORY.md が200行/25KB インデックス、トピックファイルはオンデマンド。`autoMemoryEnabled: false` で無効化。
+- **[追加] CLAUDE.md HTML コメント・`claudeMdExcludes`・`CLAUDE_CODE_NEW_INIT=1`**: `<!-- -->` コメントはコンテキスト除去でトークン節約。モノレポは `claudeMdExcludes` で不要 CLAUDE.md を除外。インタラクティブ init は `CLAUDE_CODE_NEW_INIT=1` で有効化。
+- **[追加] hooks `if` フィールド・`stop_hook_active`・`InstructionsLoaded`**: v2.1.85+ の `if` でツール名＋引数の細粒度フィルタ（例: `Bash(git *)`）。Stop フック無限ループは `stop_hook_active` で防止。`InstructionsLoaded` フックで CLAUDE.md ロードタイミングをデバッグ。`CLAUDE_ENV_FILE` で direnv 等の環境変数を永続化。
 
 ## 2026-04-13
 - **Skills フロントマター深化**: `effort`・`paths`・`argument-hint`・`user-invocable`・`context: fork`・`agent` など全フィールドが判明。`$ARGUMENTS[N]`/`$N` による引数インデックスアクセス、`${CLAUDE_SESSION_ID}`/`${CLAUDE_SKILL_DIR}` 変数展開、`!`backtick シェルインジェクション（複数行は ` ```! ` ブロック）も活用可能。`disableSkillShellExecution: true` で組織ポリシーとして無効化できる。
