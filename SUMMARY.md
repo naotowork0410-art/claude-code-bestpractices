@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-04-27
+- **`opusplan` モデルエイリアス**: Plan Mode → Opus / 実行フェーズ → Sonnet の自動切替で高品質推論とコスト効率を両立。`CLAUDE_CODE_SUBAGENT_MODEL: "haiku"` でサブエージェントをさらに低コストモデルへ。
+- **エフォートレベル体系化**: Opus 4.7 は `low/medium/high/xhigh/max` の5段階（v2.1.117+ でデフォルト `xhigh`）。スキル・サブエージェントフロントマターで `effort:` を個別指定可能。`max` はセッション限定。
+- **`permissions.ask`・新設定項目**: `allow`/`deny` に加え `ask`（確認プロンプト）で3ティア権限管理。`showThinkingSummaries`、`fastModePerSessionOptIn`、`disableAutoMode` 等が追加。配列設定はスコープ間でマージ（置換でなく連結）。MCP は SSE 非推奨・HTTP（OAuth 2.1）が標準に。
+
 ## 2026-04-20
 - **hooks カデンス設計**: Per-session/Per-turn/Per-tool の3分類が明確化。テストスイートは `PostToolUse` ではなく `Stop` フックへ。PreToolUse ブロック理由は `>&2` で Claude に伝達。PostToolUse には `; exit 0` フォールバック必須。
 - **コンテキスト定量モデルと設計原則**: 90% 使用率で深刻劣化。ガイダンスなしの成功率 33%（Anthropic 実測）。2026 年は「プロンプト技巧 < コンテキスト設計（CLAUDE.md・MCP・サブエージェント構造）」が定説化。フィードバックループ（検証コマンド）をプロンプトに埋め込む手法が推奨。
