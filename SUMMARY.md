@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-05-04
+- **`.claude/rules/` パススコープルール**: YAML `paths:` フロントマターで対象ファイル読み込み時のみルールをロード。CLAUDE.md 肥大化を構造的に解決。`~/.claude/rules/` でユーザーレベル共通設定も可。シンボリックリンクで複数プロジェクト共有可能。
+- **検証ファースト原則 & AskUserQuestion インタビューパターン**: 「検証手段を与えること」が単一最大レバレッジポイント（公式確認）。大型機能前に Claude にインタビューさせて SPEC.md 生成 → 別セッションで実装がベストプラクティス化。
+- **CLAUDE.md 組織管理強化**: マネージドポリシー CLAUDE.md（`/etc/claude-code/CLAUDE.md`）、AGENTS.md クロスツール互換 `@import`、`/compact` 後の再ロード動作（ルートは再注入・サブディレクトリは非自動）、`/memory` コマンドによる全メモリファイル管理、`--append-system-prompt` での強制指示注入。
+
 ## 2026-04-27
 - **`opusplan` モデルエイリアス**: Plan Mode → Opus / 実行フェーズ → Sonnet の自動切替で高品質推論とコスト効率を両立。`CLAUDE_CODE_SUBAGENT_MODEL: "haiku"` でサブエージェントをさらに低コストモデルへ。
 - **エフォートレベル体系化**: Opus 4.7 は `low/medium/high/xhigh/max` の5段階（v2.1.117+ でデフォルト `xhigh`）。スキル・サブエージェントフロントマターで `effort:` を個別指定可能。`max` はセッション限定。
