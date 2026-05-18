@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-05-18
+- **Hooks 28+イベント・5ハンドラータイプの全容**: `asyncRewake`（バックグラウンドから Claude を再起動）、`terminalSequence`（OSC通知）、`modifiedInput`（PreToolUse でツール入力を書き換え）、`mcp_tool` ハンドラー（MCP サーバー直接呼び出し）、`allowedEnvVars`（HTTP フック環境変数）が新規確認。`additionalContext` は10,000文字上限・指示形式NG。
+- **サブエージェント管理の進化**: `/agents` UI でインタラクティブ作成・管理。`--agents` CLI フラグで一時エージェント定義。スコープ優先度: Managed > CLI > Project > User > Plugin。`memory: user` で `~/.claude/agent-memory/` に跨セッション永続化。Explore の thoroughness は quick/medium/very thorough。
+- **settings.json 新項目・CLAUDE.md ↔ スキル住み分け・コンテキスト管理詳細**: `advisorModel`（セカンダリ推論モデル）、`cleanupPeriodDays: 0`（履歴無効化）、`disableAllHooks`。CLAUDE.md = 全セッション共通、Skills = オンデマンド。「2回修正ルール」公式化。`/rewind` の5オプション（会話のみ・コードのみ・両方・指定点以降を圧縮・指定点以前を圧縮）。
+
 ## 2026-05-11
 - **Routines（スケジュール自動実行）**: プロンプト+リポジトリ+コネクタをセットにしてcron/API/GitHubイベントで自動実行。クラウドインフラ上で動くため深夜バッチも可。Pro:5回/日、Max:15回/日、Team/Enterprise:25回/日。
 - **`/btw` コマンド（v2.1.72）**: 作業中のClaudeに割り込まず、会話履歴に残らない側聞きを実現。プロンプトキャッシュ再利用でコスト最小。サブエージェントとの対比:「既知情報→/btw / 新規調査→subagent」。
