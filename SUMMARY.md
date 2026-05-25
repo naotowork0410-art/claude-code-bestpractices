@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-05-25
+- **コンテキストコスト全体像 & `disable-model-invocation`**: 公式が機能別コスト表を公開。Skills の説明文はデフォルトで毎セッション読み込まれる。`disable-model-invocation: true` でコストをゼロに（副作用スキルに必須）。`skillOverrides` でファイル編集なしに可視性変更可能。
+- **CLAUDE.md 200行ガイドライン & 機能追加トリガー表**: 200行超えたら Skills・`.claude/rules/` へ分離。「2回間違えたら CLAUDE.md」「3回貼り付けたら Skill」「毎回コピーしたら MCP」など公式トリガー表が整備された。
+- **Custom Statusline・Code Intelligence・機能レイヤー規則**: `/statusline` コマンドで JSON 駆動のコンテキスト使用率バーを即座に設定可能。LSP 連携の Code Intelligence プラグインがファイル読み込みを削減。CLAUDE.md は加算的・Skills/MCP は名前上書き・Hooks は全マージ という機能レイヤー規則が公式明確化。
+
 ## 2026-05-18
 - **Hooks 28+イベント・5ハンドラータイプの全容**: `asyncRewake`（バックグラウンドから Claude を再起動）、`terminalSequence`（OSC通知）、`modifiedInput`（PreToolUse でツール入力を書き換え）、`mcp_tool` ハンドラー（MCP サーバー直接呼び出し）、`allowedEnvVars`（HTTP フック環境変数）が新規確認。`additionalContext` は10,000文字上限・指示形式NG。
 - **サブエージェント管理の進化**: `/agents` UI でインタラクティブ作成・管理。`--agents` CLI フラグで一時エージェント定義。スコープ優先度: Managed > CLI > Project > User > Plugin。`memory: user` で `~/.claude/agent-memory/` に跨セッション永続化。Explore の thoroughness は quick/medium/very thorough。
