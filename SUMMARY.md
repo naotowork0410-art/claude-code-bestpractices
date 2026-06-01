@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-06-01
+- **AutoDream（`autoDreamEnabled`）**: セッション終了後に起動するバックグラウンドサブエージェントがメモリを自動統合。`/memory` で "Auto-dream: on" を確認。`autoMemoryDirectory` でカスタム保存先も指定可能。
+- **`.claudeignore` でコンテキスト 40-70% 削減**: `.gitignore` 同構文で Claude の自動探索対象外ファイルを指定。`node_modules/`・`dist/`・`*.lock` を除外するだけで最大効果。機密ファイルは `permissions.deny` で別管理。
+- **`/goal` コマンド（v2.1.139）・`sandbox` 詳細設定・新 `settings.json` 項目**: `/goal` で複数ターン自律完了条件を設定（evaluator サブエージェントが毎ターン条件チェック）。`sandbox.filesystem.denyRead` で機密ファイルを OS レベルでブロック。`worktree.symlinkDirectories`・`attribution`・`alwaysThinkingEnabled` 等の新設定を追加。1M トークンは「コンテキスト量より質」戦略が依然重要。
+
 ## 2026-05-25
 - **コンテキストコスト全体像 & `disable-model-invocation`**: 公式が機能別コスト表を公開。Skills の説明文はデフォルトで毎セッション読み込まれる。`disable-model-invocation: true` でコストをゼロに（副作用スキルに必須）。`skillOverrides` でファイル編集なしに可視性変更可能。
 - **CLAUDE.md 200行ガイドライン & 機能追加トリガー表**: 200行超えたら Skills・`.claude/rules/` へ分離。「2回間違えたら CLAUDE.md」「3回貼り付けたら Skill」「毎回コピーしたら MCP」など公式トリガー表が整備された。
