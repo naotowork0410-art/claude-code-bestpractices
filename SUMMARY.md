@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-06-08
+- **Skills とカスタムコマンドの統合**: `.claude/commands/` と `.claude/skills/<name>/SKILL.md` は統合・同等。新規は Skills 形式推奨。`disable-model-invocation: true`・`context: fork`・`paths:` など詳細フロントマターを活用。動的コンテキスト注入（`` !`command` ``）でスキル実行時のみシェル出力をインライン展開可能。
+- **CLAUDE.md の `.claude/rules/` 分離 & 200行ガイドライン**: `paths:` フロントマターで特定ファイル読み込み時のみロードするルールを設定。HTML コメント（`<!-- -->`）はコンテキストから除去されトークン節約に有効。`claudeMdExcludes` でモノレポ内の不要 CLAUDE.md をスキップ。`@AGENTS.md` インポートで他 AI ツールとの共存も可能。
+- **hooks 25+ イベント・5タイプ完全版**: `PermissionRequest`（自動承認）・`PreCompact`/`PostCompact`（コンパクション前後処理）・`SubagentStart`/`SubagentStop`・`WorktreeCreate`/`WorktreeRemove` 等が追加確認。`settings.json` 4スコープ体系（Managed > Local > Project > User）と `$schema` 追加によるエディタ補完が実用的。
+
 ## 2026-06-01
 - **AutoDream（`autoDreamEnabled`）**: セッション終了後に起動するバックグラウンドサブエージェントがメモリを自動統合。`/memory` で "Auto-dream: on" を確認。`autoMemoryDirectory` でカスタム保存先も指定可能。
 - **`.claudeignore` でコンテキスト 40-70% 削減**: `.gitignore` 同構文で Claude の自動探索対象外ファイルを指定。`node_modules/`・`dist/`・`*.lock` を除外するだけで最大効果。機密ファイルは `permissions.deny` で別管理。
