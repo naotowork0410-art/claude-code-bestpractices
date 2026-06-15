@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-06-15
+- **Claude Fable 5（Mythos クラス）リリース（6/9）**: Opus の上位モデル。エージェントハーネスで数日間自律稼働が可能、1M トークンコンテキスト対応。長時間エージェントタスクに `model: fable-5` を指定。
+- **プラグインマーケットプレイス & Code Intelligence**: 公式マーケットプレイスに 101+ プラグイン。`/plugin install pyright-lsp` 等 LSP プラグインでジャンプ・型エラー検出が可能、ファイル読み込みを削減。
+- **公式 5 大アンチパターン & 敵対的レビューパターン**: Kitchen Sink / 過剰訂正 / CLAUDE.md 肥大化 / 検証省略 / 無限探索 が公式化。実装後は `/code-review` スキルで別サブエージェントによる差分審査が推奨。`/rewind` の "Summarize from/up to here" 2 モードも明確化。`--permission-mode auto` + `--allowedTools` でファンアウトスケーリング、MCP 2.4 で MFA/監査ログ対応。
+
 ## 2026-06-08
 - **Skills とカスタムコマンドの統合**: `.claude/commands/` と `.claude/skills/<name>/SKILL.md` は統合・同等。新規は Skills 形式推奨。`disable-model-invocation: true`・`context: fork`・`paths:` など詳細フロントマターを活用。動的コンテキスト注入（`` !`command` ``）でスキル実行時のみシェル出力をインライン展開可能。
 - **CLAUDE.md の `.claude/rules/` 分離 & 200行ガイドライン**: `paths:` フロントマターで特定ファイル読み込み時のみロードするルールを設定。HTML コメント（`<!-- -->`）はコンテキストから除去されトークン節約に有効。`claudeMdExcludes` でモノレポ内の不要 CLAUDE.md をスキップ。`@AGENTS.md` インポートで他 AI ツールとの共存も可能。
