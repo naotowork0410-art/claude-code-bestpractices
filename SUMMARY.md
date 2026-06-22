@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-06-22
+- **managed-settings.d/ ドロップインディレクトリ**: systemd 方式でチーム・ツールごとにポリシー JSON を独立管理。数字プレフィックスでマージ順制御（`10-security.json` → `20-devtools.json`）。単一ファイルへの競合編集が不要になる。
+- **新 settings.json 項目（v2.1.136-182）**: `footerLinksRegexes`（チケット ID → クリッカブルバッジ）・`axScreenReader`・`disableClaudeAiConnectors`・`policyHelper`（動的ポリシー計算）。`/config key=value` で単一設定を即時更新可能。
+- **Hooks 37イベント確定・async/asyncRewake/terminalSequence 追加**: `async: true` でノンブロッキングバックグラウンド実行、`asyncRewake: true` でバックグラウンド完了後に Claude を再起動、`terminalSequence` でデスクトップ通知（v2.1.141+）、`updatedToolOutput` でツール出力のリダクション。MCP ツール数は 40 が安定動作の目安（50超で誤選択）、Streamable HTTP が新標準トランスポート。CLAUDE.md にコンパクション指示を埋め込み重要情報の保持を制御可能。
+
 ## 2026-06-15
 - **Claude Fable 5（Mythos クラス）リリース（6/9）**: Opus の上位モデル。エージェントハーネスで数日間自律稼働が可能、1M トークンコンテキスト対応。長時間エージェントタスクに `model: fable-5` を指定。
 - **プラグインマーケットプレイス & Code Intelligence**: 公式マーケットプレイスに 101+ プラグイン。`/plugin install pyright-lsp` 等 LSP プラグインでジャンプ・型エラー検出が可能、ファイル読み込みを削減。
