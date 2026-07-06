@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-07-06
+- **新 settings.json 項目（v2.1.175〜v2.1.200）**: `availableModels`+`enforceAvailableModels`（モデル選択制限）、`askUserQuestionTimeout`（非インタラクティブ向け自動続行）、`autoMode.classifyAllShell`（全シェルを安全分類器に通す）、`enabledMcpjsonServers`（信頼フォルダ外での承認サーバー指定）。
+- **マルチスラッシュコマンドスタック（v2.1.199）**: `/code-review /fix-issue` のように連続入力で最大6スキルを同時ロード。「レビュー→修正」を1入力で実行可能。
+- **CLAUDE.md の実効命令予算（~100〜150）と削除テスト**: Claude 組み込みプロンプトが ~50 命令消費するため実効予算は 100〜150。各行に「削除しても Claude が間違えないなら削除」テストを適用し 100 行以下を目標に。`CLAUDE.local.md` で個人設定を git 管理外で分離。MCP スターターセットは filesystem・github・context7・playwright・sequential-thinking の5本が推奨。Writer/Reviewer パターンが公式化。
+
 ## 2026-06-22
 - **managed-settings.d/ ドロップインディレクトリ**: systemd 方式でチーム・ツールごとにポリシー JSON を独立管理。数字プレフィックスでマージ順制御（`10-security.json` → `20-devtools.json`）。単一ファイルへの競合編集が不要になる。
 - **新 settings.json 項目（v2.1.136-182）**: `footerLinksRegexes`（チケット ID → クリッカブルバッジ）・`axScreenReader`・`disableClaudeAiConnectors`・`policyHelper`（動的ポリシー計算）。`/config key=value` で単一設定を即時更新可能。
