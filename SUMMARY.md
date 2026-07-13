@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-07-13
+- **`/doctor` コマンド（v2.1.205）**: セットアップの健全性チェックが「読み取り専用」から「診断＋修正提案」に進化。未使用スキル・MCP・プラグインのコンテキストコスト比較、CLAUDE.md 重複検出・トリミング提案、遅いフック検出を実行。`/checkup` がエイリアス。
+- **Claude Sonnet 5 が新デフォルト + サブエージェントのバックグラウンド実行デフォルト化**: Sonnet 5 は 1M トークンネイティブ・adaptive thinking ON・API $2/$10 per MTok。サブエージェントは結果を待たずに Claude が作業継続、`background: false` でピン留め可能。
+- **Auto mode セキュリティ強化**: トランスクリプト改ざんブロック・未解決変数の `rm -rf` 前確認・バックグラウンドタスク通知に「人間の入力なし」を明記。Desktop に in-app ブラウザ搭載。フックのハイフン識別子が完全一致に変更（`mcp__brave-search__.*` 形式に要更新）。
+
 ## 2026-07-06
 - **新 settings.json 項目（v2.1.175〜v2.1.200）**: `availableModels`+`enforceAvailableModels`（モデル選択制限）、`askUserQuestionTimeout`（非インタラクティブ向け自動続行）、`autoMode.classifyAllShell`（全シェルを安全分類器に通す）、`enabledMcpjsonServers`（信頼フォルダ外での承認サーバー指定）。
 - **マルチスラッシュコマンドスタック（v2.1.199）**: `/code-review /fix-issue` のように連続入力で最大6スキルを同時ロード。「レビュー→修正」を1入力で実行可能。
