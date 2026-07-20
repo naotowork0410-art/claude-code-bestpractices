@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-07-20
+- **`/fork` と `/subtask` の役割再分割（v2.1.212）**: `/fork` はセッションをバックグラウンドにコピー、`/subtask` が新設されセッション内サブエージェント起動を担う。`/resume` もインタラクティブピッカーに進化。
+- **セッション単位の上限追加（v2.1.212）**: `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`・`CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`（デフォルト各200）、`CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS`（2分超 MCP 自動バックグラウンド）。CI では上限を 10〜20 に設定推奨。
+- **Auto-mode スキル手動化（v2.1.215）& パーミッション構文 deprecation（v2.1.210）**: `/verify`・`/code-review` が自動実行されなくなり明示呼び出しが必要に。`Write()`→`Edit()`・`Glob()`→`Read()` への構文更新で起動時警告ゼロを目標に。
+
 ## 2026-07-13
 - **`/doctor` コマンド（v2.1.205）**: セットアップの健全性チェックが「読み取り専用」から「診断＋修正提案」に進化。未使用スキル・MCP・プラグインのコンテキストコスト比較、CLAUDE.md 重複検出・トリミング提案、遅いフック検出を実行。`/checkup` がエイリアス。
 - **Claude Sonnet 5 が新デフォルト + サブエージェントのバックグラウンド実行デフォルト化**: Sonnet 5 は 1M トークンネイティブ・adaptive thinking ON・API $2/$10 per MTok。サブエージェントは結果を待たずに Claude が作業継続、`background: false` でピン留め可能。
