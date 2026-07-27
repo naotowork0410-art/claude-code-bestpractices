@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-07-27
+- **Claude Opus 5 デフォルト化（v2.1.219）+ `fallbackModel` チェーン**: `opus` エイリアスが Opus 5（1M ctx）に更新。`"fallbackModel": ["sonnet", "haiku"]` で可用性ベースのフォールバックを設定可能（最大3エントリ、チェーンはターン限定）。Fable 5/Opus 5 にはコンテンツベース自動フォールバックも追加。
+- **ネスト型サブエージェント深さ3固定 + `--safe-mode`（v2.1.169/219）**: 7/21〜7/24 の変更でデフォルト深さ3（`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`で制御）。`claude --safe-mode` で CLAUDE.md/Skills/Hooks/MCP を全無効化したクリーンセッションを起動できるトラブルシューティング機能も実装。
+- **新機能群（v2.1.218/219）**: `/code-review` がバックグラウンドサブエージェント化（コンテキスト消費ゼロに）、`/cd` でプロンプトキャッシュ維持したままセッション移動、`sandbox.network.strictAllowlist`/`sandbox.filesystem.disabled` で細粒度の sandbox 制御、`DirectoryAdded` フック追加、`disableBundledSkills` でバンドルスキルのコンテキスト除去が可能。
+
 ## 2026-07-20
 - **`/fork` と `/subtask` の役割再分割（v2.1.212）**: `/fork` はセッションをバックグラウンドにコピー、`/subtask` が新設されセッション内サブエージェント起動を担う。`/resume` もインタラクティブピッカーに進化。
 - **セッション単位の上限追加（v2.1.212）**: `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`・`CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`（デフォルト各200）、`CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS`（2分超 MCP 自動バックグラウンド）。CI では上限を 10〜20 に設定推奨。
