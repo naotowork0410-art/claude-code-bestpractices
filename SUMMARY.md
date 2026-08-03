@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-08-03
+- **`workflowSizeGuideline` 設定（v2.1.219）+ `Notification` フック**: `"workflowSizeGuideline": "medium"` で動的ワークフローの推奨エージェント数を small/medium/large で管理。`Notification` フックで `agent_needs_input` / `agent_completed` を Slack/デスクトップへ転送可能になった。
+- **Claude API Context Engineering 3 プリミティブ（公式クックブック）**: Compaction（`compact_20260112`）・Tool-Result Clearing（`clear_tool_uses_20250919`）・Memory Tool（`memory_20250818`）の組み合わせでピークコンテキストを最大 50% 削減。カスタムエージェント開発と `/compact` 手動実行の両面で活用可能。
+- **MCP デバッグ最速手順 + スキル vs コマンドの 4 象限フレームワーク**: `jq` JSON 検証→直接コマンド実行→`claude mcp list` の順でデバッグ。グローバル MCP は filesystem/github/context7 の 3 本に絞るのが 2026 年の推奨。「強制→Hooks、知識→Skills、委譲→Subagents、常時ガイダンス→CLAUDE.md」の 4 象限で設定先を整理。
+
 ## 2026-07-27
 - **Claude Opus 5 デフォルト化（v2.1.219）+ `fallbackModel` チェーン**: `opus` エイリアスが Opus 5（1M ctx）に更新。`"fallbackModel": ["sonnet", "haiku"]` で可用性ベースのフォールバックを設定可能（最大3エントリ、チェーンはターン限定）。Fable 5/Opus 5 にはコンテンツベース自動フォールバックも追加。
 - **ネスト型サブエージェント深さ3固定 + `--safe-mode`（v2.1.169/219）**: 7/21〜7/24 の変更でデフォルト深さ3（`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`で制御）。`claude --safe-mode` で CLAUDE.md/Skills/Hooks/MCP を全無効化したクリーンセッションを起動できるトラブルシューティング機能も実装。
