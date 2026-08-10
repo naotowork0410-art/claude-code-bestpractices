@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-08-10
+- **クロスセッション エージェント通信（v2.1.224/225）**: `SendMessage`/`ListAgents` がクロスマシン対応に。`crossSessionInbound: true` と `dialogExpiry` 設定で受信制御。`claude self-hosted-runner` で Team/Enterprise の自社インフラ上セッション実行が可能に。
+- **セキュリティ強化（v2.1.222/223/224）**: `PreToolUse` auto-allow の `permissions.deny` バイパス脆弱性が修正。`sandbox.credentials` で JWT/AWS SigV4 自動マスキング追加。`strictKnownMarketplaces: ["owner/*"]` ワイルドカードでプラグイン供給元を組織単位で制限可能に。
+- **サブエージェントスケーリング刷新**: セッションあたり 200 サブエージェント上限が撤廃（v2.1.224）。`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`（デフォルト 20）で同時実行を制御。コンテキスト 70% で `/compact`・90%+ で `/clear` が定説化。
+
 ## 2026-08-03
 - **`workflowSizeGuideline` 設定（v2.1.219）+ `Notification` フック**: `"workflowSizeGuideline": "medium"` で動的ワークフローの推奨エージェント数を small/medium/large で管理。`Notification` フックで `agent_needs_input` / `agent_completed` を Slack/デスクトップへ転送可能になった。
 - **Claude API Context Engineering 3 プリミティブ（公式クックブック）**: Compaction（`compact_20260112`）・Tool-Result Clearing（`clear_tool_uses_20250919`）・Memory Tool（`memory_20250818`）の組み合わせでピークコンテキストを最大 50% 削減。カスタムエージェント開発と `/compact` 手動実行の両面で活用可能。
