@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-08-17
+- **サブエージェント fork デフォルト化（v2.1.232）**: `subagent_type: "fork"` が全サブエージェントのデフォルトに。親セッションの会話・プロンプトキャッシュを引き継ぐため「背景説明プロンプト」が不要に。非チームメートのサブエージェントはインタラクティブ起動でもバックグラウンドがデフォルト化。
+- **`@セッション名` メンション構文（v2.1.232）+ TodoツールのSonnet 5/Opus 4.8以降での廃止（v2.1.233）**: プロンプトに `@名前` と書くだけで別セッションに `SendMessage` が飛ぶ。TaskCreate等は最新モデルでデフォルト無効（`CLAUDE_CODE_ENABLE_TODO_TOOLS=1` で再有効化）。
+- **Desktop Auto-continue チェックボックス（2026-08-14）+ 新環境変数2本**: 使用制限リセット後の自動再開がDesktopアプリで実現。`CLAUDE_CODE_TOOL_MEMORY_LIMIT`（Linux Bashメモリcgroup）・`CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS`（WebFetchキャッシュTTL）が追加。
+
 ## 2026-08-10
 - **クロスセッション エージェント通信（v2.1.224/225）**: `SendMessage`/`ListAgents` がクロスマシン対応に。`crossSessionInbound: true` と `dialogExpiry` 設定で受信制御。`claude self-hosted-runner` で Team/Enterprise の自社インフラ上セッション実行が可能に。
 - **セキュリティ強化（v2.1.222/223/224）**: `PreToolUse` auto-allow の `permissions.deny` バイパス脆弱性が修正。`sandbox.credentials` で JWT/AWS SigV4 自動マスキング追加。`strictKnownMarketplaces: ["owner/*"]` ワイルドカードでプラグイン供給元を組織単位で制限可能に。
