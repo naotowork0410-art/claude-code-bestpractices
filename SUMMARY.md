@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-08-24
+- **Output Styles 5種完全版 + カスタム Output Style（v2.1.237）**: Concise（結果ファースト・前置き省略）・Proactive・Explanatory・Learning の4スタイルが追加確定。`.claude/output-styles/` でカスタムスタイル作成可能（`keep-coding-instructions: true` でコーディング指示維持）。Output Style はメイン会話のみ適用、サブエージェントには引き継がれない（fork は継承）。
+- **サブエージェント フロントマター公式完全版**: `permissionMode`・`maxTurns`・`isolation: worktree`・`color`・`initialPrompt`・エージェントレベル `hooks`・`skills` プリロード・インライン `mcpServers` 定義が全確定。`@"agent-name (agent)"` 構文で委譲を保証、`--agent` CLI フラグでセッション全体のデフォルトエージェントを指定可能。
+- **公式比較フレームワーク確立**: Output Styles（システムプロンプト直接変更・毎ターン同形式）/ CLAUDE.md（常時コンテキスト）/ `--append-system-prompt`（単発追記）/ Subagents（独立ヘルパー）/ Skills（再利用ワークフロー）の使い分けが公式ドキュメントで明確化。
+
 ## 2026-08-17
 - **サブエージェント fork デフォルト化（v2.1.232）**: `subagent_type: "fork"` が全サブエージェントのデフォルトに。親セッションの会話・プロンプトキャッシュを引き継ぐため「背景説明プロンプト」が不要に。非チームメートのサブエージェントはインタラクティブ起動でもバックグラウンドがデフォルト化。
 - **`@セッション名` メンション構文（v2.1.232）+ TodoツールのSonnet 5/Opus 4.8以降での廃止（v2.1.233）**: プロンプトに `@名前` と書くだけで別セッションに `SendMessage` が飛ぶ。TaskCreate等は最新モデルでデフォルト無効（`CLAUDE_CODE_ENABLE_TODO_TOOLS=1` で再有効化）。
