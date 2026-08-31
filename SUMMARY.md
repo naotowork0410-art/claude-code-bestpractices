@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-08-31
+- **PreModelSwitch / PostModelSwitch Hook（v2.1.251）**: モデル切り替えをブロック・確認・ログ記録できる2イベントが追加。`from_model`/`to_model` フィールドを受け取り、PreModelSwitch は exit 2 でブロック可能。コスト管理ゲートやモデル変更監査ログに活用。
+- **settings.json 新項目（v2.1.238〜v2.1.251）**: `promptCacheTtl`/`subagentPromptCacheTtl`（キャッシュTTL延長）・`modelPicker`（ピッカー整理）・`modelPricing`（組織契約レート）・`spellcheck`（プロンプトスペルチェック）・`keybindingFlavor: "readline"` が追加。エージェントfrontmatter に `experimental.cacheTtl` でper-agent TTL 設定も可能（v2.1.248）。
+- **セキュリティ・コスト管理強化**: `--restricted` フラグでコマンドツールを全除去（v2.1.248）、path-traversal 脆弱性修正6件（v2.1.251）。`/usage` に Loops Breakdown（ループ別token消費）・spend limit bar を追加、`/claude-api cost-optimize` でAPIコスト最適化分析が可能（v2.1.247）。
+
 ## 2026-08-24
 - **Output Styles 5種完全版 + カスタム Output Style（v2.1.237）**: Concise（結果ファースト・前置き省略）・Proactive・Explanatory・Learning の4スタイルが追加確定。`.claude/output-styles/` でカスタムスタイル作成可能（`keep-coding-instructions: true` でコーディング指示維持）。Output Style はメイン会話のみ適用、サブエージェントには引き継がれない（fork は継承）。
 - **サブエージェント フロントマター公式完全版**: `permissionMode`・`maxTurns`・`isolation: worktree`・`color`・`initialPrompt`・エージェントレベル `hooks`・`skills` プリロード・インライン `mcpServers` 定義が全確定。`@"agent-name (agent)"` 構文で委譲を保証、`--agent` CLI フラグでセッション全体のデフォルトエージェントを指定可能。
