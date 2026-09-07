@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-09-07
+- **Claude Fable 5.1 追加（v2.1.257）**: 1M ctx・$10/$50 per Mtok・キャッシュリード $0.25/Mtok。`/effort` 変更がキャッシュを無効化しなくなった。`CLAUDE_CODE_SUBAGENT_MODEL_FORCE` 環境変数でサブエージェントモデルをフロントマター指定を越えて強制適用可能に。
+- **新コマンド `/diff`・`/skill-doctor`（v2.1.260/261）**: `/diff` でフルスクリーン差分パネルを起動、`/skill-doctor` で未使用スキルとコンテキストコストを診断。`bashOutputMaxChars`/`taskOutputMaxChars` で Bash 出力上限を最大 128K 文字まで拡張可能に。
+- **権限・MCP・キャッシュ強化（v2.1.257〜261）**: `--permission-prompts none` で無人実行時の権限プロンプトを全拒否。`managedMcpServers` で組織が HTTP/SSE MCP サーバーを全ユーザーに配布可能に。`/cost` にキャッシュミス原因表示・`timeFormat`/`timeZone` 設定追加。Auto mode にクラウドメタデータエンドポイントへの自動ブロックルール追加。
+
 ## 2026-08-31
 - **PreModelSwitch / PostModelSwitch Hook（v2.1.251）**: モデル切り替えをブロック・確認・ログ記録できる2イベントが追加。`from_model`/`to_model` フィールドを受け取り、PreModelSwitch は exit 2 でブロック可能。コスト管理ゲートやモデル変更監査ログに活用。
 - **settings.json 新項目（v2.1.238〜v2.1.251）**: `promptCacheTtl`/`subagentPromptCacheTtl`（キャッシュTTL延長）・`modelPicker`（ピッカー整理）・`modelPricing`（組織契約レート）・`spellcheck`（プロンプトスペルチェック）・`keybindingFlavor: "readline"` が追加。エージェントfrontmatter に `experimental.cacheTtl` でper-agent TTL 設定も可能（v2.1.248）。
