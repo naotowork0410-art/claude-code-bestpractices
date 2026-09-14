@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-09-14
+- **`claude plugin eval` + `bashEditDiffEnabled`（v2.1.269）**: プラグイン eval スイートを JSON/HTML レポートで実行・スコア化する新コマンド追加。`bashEditDiffEnabled: true` で Bash によるファイル変更の差分がツール結果に自動付与。
+- **VSCode 統合大幅強化（v2.1.268〜269）**: Agent Map（サブエージェント個別停止）・Hooks Dialog・Permission Rules Dialog・MCP Servers Dialog・Focus View が追加。IDE だけでフル設定管理が可能に。
+- **OTEL/ワークフロー/WebFetch 新設定**: `OTEL_METRICS_INCLUDE_REPOSITORY` でリポジトリ別コスト可視化、`CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS`（1〜256）でワークフロー並列数制御、`CLAUDE_CODE_WEBFETCH_DEADLINE_MS`（デフォルト 300s）で WebFetch タイムアウト制御。
+
 ## 2026-09-07
 - **Claude Fable 5.1 追加（v2.1.257）**: 1M ctx・$10/$50 per Mtok・キャッシュリード $0.25/Mtok。`/effort` 変更がキャッシュを無効化しなくなった。`CLAUDE_CODE_SUBAGENT_MODEL_FORCE` 環境変数でサブエージェントモデルをフロントマター指定を越えて強制適用可能に。
 - **新コマンド `/diff`・`/skill-doctor`（v2.1.260/261）**: `/diff` でフルスクリーン差分パネルを起動、`/skill-doctor` で未使用スキルとコンテキストコストを診断。`bashOutputMaxChars`/`taskOutputMaxChars` で Bash 出力上限を最大 128K 文字まで拡張可能に。
