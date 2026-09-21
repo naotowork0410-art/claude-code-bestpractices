@@ -1,5 +1,10 @@
 # Claude Code ベストプラクティス調査 サマリー
 
+## 2026-09-21
+- **AGENTS.md サポート（v2.1.277/278）**: CLAUDE.md 不在プロジェクトで `AGENTS.md` を自動読み込み。他 AI ツールとの共存リポジトリで設定ファイルを統一可能に。`/config` の「Project instructions」から編集可能。
+- **Auto mode サーバーサイドクラシファイア（v2.1.278）+ skills 同期（v2.1.275）**: API/Enterprise がサーバーサイドクラシファイアにデフォルト変更でクラシファイア追加課金ゼロ。claude.ai アカウントのスキル/プラグインが CLI に自動同期（`syncClaudeAiSkills/syncClaudeAiPlugins: false` でオプトアウト可能）。
+- **`maxEffortLevel`・`CLAUDE_CODE_MCP_STARTUP_WAIT_MS`・`omitClaudeMd` が実用段階**: `maxEffortLevel` でモデル別エフォートキャップ（コスト管理）、`CLAUDE_CODE_MCP_STARTUP_WAIT_MS=0` でCI起動高速化、`omitClaudeMd: true` でサブエージェントのCLAUDE.md読み込みを除去しトークン削減。
+
 ## 2026-09-14
 - **`claude plugin eval` + `bashEditDiffEnabled`（v2.1.269）**: プラグイン eval スイートを JSON/HTML レポートで実行・スコア化する新コマンド追加。`bashEditDiffEnabled: true` で Bash によるファイル変更の差分がツール結果に自動付与。
 - **VSCode 統合大幅強化（v2.1.268〜269）**: Agent Map（サブエージェント個別停止）・Hooks Dialog・Permission Rules Dialog・MCP Servers Dialog・Focus View が追加。IDE だけでフル設定管理が可能に。
